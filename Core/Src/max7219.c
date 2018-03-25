@@ -20,12 +20,12 @@ uint8_t SPI_BUF_TX[2] = {0};
 /* Private functions ---------------------------------------------------------*/
 void CS_SET(void){
   // Set chip select (CS)
-  HAL_GPIO_WritePin(SPI4_PORT, SPI4_CS, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(SPI4_CS_GPIO_Port, SPI4_CS_Pin, GPIO_PIN_RESET);
 }
 
 void CS_RESET(void){
   // Reset chip select (CS)
-  HAL_GPIO_WritePin(SPI4_PORT, SPI4_CS, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(SPI4_CS_GPIO_Port, SPI4_CS_Pin, GPIO_PIN_SET);
 }
 
 void MAX7219_SendByte(uint8_t address, uint8_t data){

@@ -40,12 +40,17 @@
 #include "stm32f4xx_hal.h"
 
 extern void _Error_Handler(char *, int);
+/* USER CODE BEGIN 0 */
 
+/* USER CODE END 0 */
 /**
   * Initializes the Global MSP.
   */
 void HAL_MspInit(void)
 {
+  /* USER CODE BEGIN MspInit 0 */
+
+  /* USER CODE END MspInit 0 */
 
   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
@@ -65,6 +70,9 @@ void HAL_MspInit(void)
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 
+  /* USER CODE BEGIN MspInit 1 */
+
+  /* USER CODE END MspInit 1 */
 }
 
 void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
@@ -73,6 +81,9 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
   GPIO_InitTypeDef GPIO_InitStruct;
   if(hspi->Instance==SPI4)
   {
+  /* USER CODE BEGIN SPI4_MspInit 0 */
+
+  /* USER CODE END SPI4_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_SPI4_CLK_ENABLE();
   
@@ -88,6 +99,9 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI4;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
+  /* USER CODE BEGIN SPI4_MspInit 1 */
+
+  /* USER CODE END SPI4_MspInit 1 */
   }
 
 }
@@ -97,6 +111,9 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
   if(hspi->Instance==SPI4)
   {
+  /* USER CODE BEGIN SPI4_MspDeInit 0 */
+
+  /* USER CODE END SPI4_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_SPI4_CLK_DISABLE();
   
@@ -107,9 +124,16 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
     */
     HAL_GPIO_DeInit(GPIOE, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14);
 
+  /* USER CODE BEGIN SPI4_MspDeInit 1 */
+
+  /* USER CODE END SPI4_MspDeInit 1 */
   }
 
 }
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 
 /**
   * @}
