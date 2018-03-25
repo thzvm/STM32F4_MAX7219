@@ -6,4 +6,4 @@ Highly convenient 7-segment driver IC for MCU with SPI interface.
 * PE13 - MISO - LOAD
 * PE14 - MOSI - DIN
 
-![Schematic](https://bitbucket.org/thzvm/stm32f4_max7219/downloads/Schematic.png)
+![Schematic](https://raw.githubusercontent.com/thzvm/STM32F4_MAX7219/master/Schematic.png)
