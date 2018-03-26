@@ -49,7 +49,13 @@ SPI_HandleTypeDef hspi4;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+uint8_t CodeB[10] = {MAX7219_CodeB_0, MAX7219_CodeB_1, MAX7219_CodeB_2, 
+             MAX7219_CodeB_3, MAX7219_CodeB_4, MAX7219_CodeB_5, MAX7219_CodeB_6, 
+             MAX7219_CodeB_7, MAX7219_CodeB_8, MAX7219_CodeB_9};
+unsigned char seconds = 0;
+unsigned char minutes = 0;
+unsigned char track = 1;     
+             
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,12 +110,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    MAX7219_SendByte(MAX7219_DIG_0, MAX7219_CodeB_3);
+    if (seconds >= 59){
+      minutes++;
+      seconds = 0;
+    }
+    MAX7219_SendByte(MAX7219_DIG_0, CodeB[minutes]);
     MAX7219_SendByte(MAX7219_DIG_1, MAX7219_CodeB_dash);
-    MAX7219_SendByte(MAX7219_DIG_2, MAX7219_CodeB_4);
-    MAX7219_SendByte(MAX7219_DIG_3, MAX7219_CodeB_7);  
-    MAX7219_SendByte(MAX7219_DIG_4, MAX7219_CodeB_1|MAX7219_CodeB_dot);   
-    HAL_Delay(500);
+    MAX7219_SendByte(MAX7219_DIG_2, CodeB[(seconds-(seconds%10))/10]);
+    MAX7219_SendByte(MAX7219_DIG_3, CodeB[(seconds%10)]);  
+    MAX7219_SendByte(MAX7219_DIG_4, CodeB[track]|MAX7219_CodeB_dot);   
+    seconds++;
+    HAL_Delay(950);
+    
+    if (minutes == 2 & seconds == 31){
+      track++;
+      minutes = 0;
+      seconds = 0;
+    }
+    
+    if (track == 10) {track = 1;}
+    
     
   /* USER CODE END WHILE */
 

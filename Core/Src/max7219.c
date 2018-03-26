@@ -34,13 +34,13 @@ void MAX7219_SendByte(uint8_t address, uint8_t data){
   SPI_BUF_TX[1] = data;
 
   CS_SET();
-  HAL_SPI_Transmit(&hspi4, (uint8_t*)SPI_BUF_TX, 2, 1000);
+  HAL_SPI_Transmit(&hspi4, (uint8_t*)SPI_BUF_TX, 2, 10);
   CS_RESET();
 }
 
 void MAX7219_Clear(void){
   //
-  uint8_t i = 4;
+  uint8_t i = SEGMENTS;
   do{MAX7219_SendByte(i, MAX7219_CodeB_blank);
   } while (--i);
 }
